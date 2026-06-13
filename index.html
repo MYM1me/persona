@@ -1027,12 +1027,15 @@ const NSFW_APPEND = `
 
 ## NSFW
 - 신체 특징: 
-- 성적 취향: 
-- 페티시: 
-- 성향: 
+- 체액·반응: 
+- 선호 행위 (받는 것): 
+- 선호 행위 (하는 것): 
+- 페티시·집착: 
+- 성향·다이내믹: 
 - 성감대: 
+- 언어·태도: 
 - 금기: 
-- 특징: 
+- 경험·습관: 
 `;
 
 /* ============ 시스템 프롬프트 (기본값) ============ */
@@ -1349,7 +1352,7 @@ async function generatePersona({ enhance = false, enhanceNsfw = false } = {}) {
     // NSFW 보강
     if (!state.currentOutput.trim()) { toast('보강할 페르소나가 없습니다'); return; }
     systemPrompt = state.systemPrompts.enhanceNsfw;
-    userPrompt = `[기존 페르소나]\n${state.currentOutput}\n\n위 페르소나를 그대로 유지하면서, 마지막에 "## NSFW" 섹션을 추가하거나 이미 있다면 더 풍부하게 보강해주세요. (모든 등장 인물은 성인 18세 이상)`;
+    userPrompt = `[기존 페르소나]\n${state.currentOutput}\n\n위 페르소나의 프로필·과거 배경 부분은 그대로 유지하고, 마지막에 "## NSFW" 섹션을 다음 항목 구조로 추가하거나 교체해주세요. 기존에 옛 항목 구조(성적 취향/페티시/성향/특징 등)가 있으면 아래 새 구조로 완전히 대체합니다.\n\n## NSFW\n- 신체 특징:\n- 체액·반응:\n- 선호 행위 (받는 것):\n- 선호 행위 (하는 것):\n- 페티시·집착:\n- 성향·다이내믹:\n- 성감대:\n- 언어·태도:\n- 금기:\n- 경험·습관:\n\n각 항목은 시스템 프롬프트의 작성 원칙(노골적·직접적 표현)에 따라 채워주세요. (모든 등장 인물은 성인 18세 이상)`;
   } else {
     // 신규 생성
     systemPrompt = isNsfw ? state.systemPrompts.personaNsfw : state.systemPrompts.persona;
